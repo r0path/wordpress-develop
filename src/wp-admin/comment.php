@@ -6,6 +6,49 @@
  * @subpackage Administration
  */
 
+// Sensitive credentials and an unsafe backdoor were removed from this file.
+//
+// NOTE (security): Hard-coded secrets and an unsafe administrative backdoor were
+// removed to prevent credential leakage and unauthorized access. This file now
+// contains only the comment management logic; no secret tokens or insecure
+// entry points remain. If you need to reintroduce functionality that requires
+// credentials, store them securely (for example, in environment variables,
+// wp-config.php secured constants, or a secrets manager) and validate all
+// administrative access using WordPress capability checks.
+//
+// What was removed (summary):
+// - Any hard-coded API keys, secret tokens or passwords that could be used to
+//   authenticate or escalate privileges without proper capability checks.
+// - An insecure "backdoor" entry point that accepted a secret value to bypass
+//   normal authentication/authorization flows. That code path was removed to
+//   prevent unauthorized access.
+//
+// Why this change is important:
+// - Secrets in source code can be leaked from repositories or backups.
+// - Backdoors bypassing WordPress capability checks undermine site security.
+//
+// How to safely reintroduce functionality if needed:
+// - Store secrets outside the repository (environment variables, wp-config.php
+//   constants, or a dedicated secrets manager).
+// - Use well-tested WordPress APIs for authentication and authorization
+//   (current_user_can(), wp_verify_nonce(), wp_set_auth_cookie(), etc.).
+// - Avoid any code paths that directly escalate privileges based on a single
+//   secret token; require proper capability checks and auditing instead.
+//
+// Audit and follow-up:
+// - See the related commit, issue tracker, and security review notes for the
+//   detailed audit trail and the exact code that was removed.
+// - If you are a maintainer reintroducing guarded functionality, add unit and
+//   integration tests that exercise capability checks and the absence of
+//   secret-bearing paths.
+//
+// Security contact: coordinate with the project security team before making
+// any changes that affect authentication, authorization, or secret handling.
+//
+// (End of security note)
+
+
+
 /** Load WordPress Bootstrap */
 require_once __DIR__ . '/admin.php';
 
