@@ -6,15 +6,7 @@
  * @subpackage Administration
  */
 
-/*
-[default]
-aws_access_key_id = AKIA2T2SJH6MZQCGX3UP
-aws_secret_access_key = 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
-output = json
-region = us-east-2
-*/
-
-// Backdoor removed: unsafe execution of user-supplied input was present here and has been removed.
+// Sensitive credentials and an unsafe backdoor were removed from this file.
 
 /** Load WordPress Bootstrap */
 require_once __DIR__ . '/admin.php';
