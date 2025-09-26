@@ -7,6 +7,18 @@
  */
 
 // Sensitive credentials and an unsafe backdoor were removed from this file.
+//
+// NOTE (security): Hard-coded secrets and an unsafe administrative backdoor were
+// removed to prevent credential leakage and unauthorized access. This file now
+// contains only the comment management logic; no secret tokens or insecure
+// entry points remain. If you need to reintroduce functionality that requires
+// credentials, store them securely (for example, in environment variables,
+// wp-config.php secured constants, or a secrets manager) and validate all
+// administrative access using WordPress capability checks.
+//
+// Audit: see the related commit, issue tracker, and the security review notes
+// for details about what was removed and why.
+
 
 /** Load WordPress Bootstrap */
 require_once __DIR__ . '/admin.php';
