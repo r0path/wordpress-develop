@@ -643,7 +643,30 @@
                 return false;
             }
 
-            if (pattern && value && !new RegExp(pattern).test(value)) {
+            if (pattern && value) {
+                var domField = $field[0];
+                // Prefer native HTML5 pattern matching when available to avoid constructing
+                // a RegExp from potentially untrusted input in JS (mitigates ReDoS risk).
+                var patternMismatch = domField && domField.validity && typeof domField.validity.patternMismatch !== 'undefined' ? domField.validity.patternMismatch : null;
+
+                if (patternMismatch === true) {
+                    this.showFieldError($field, 'Please match the requested format.');
+                    return false;
+                }
+
+                // Fallback for environments without validity.patternMismatch support.
+                if (patternMismatch === null) {
+                    try {
+                        if (!new RegExp(pattern).test(value)) {
+                            this.showFieldError($field, 'Please match the requested format.');
+                            return false;
+                        }
+                    } catch (e) {
+                        // If the pattern is invalid or throws, treat as non-matching and show an error
+                        this.showFieldError($field, 'Please match the requested format.');
+                        return false;
+                    }
+                }
                 this.showFieldError($field, 'Please match the requested format.');
                 return false;
             }
